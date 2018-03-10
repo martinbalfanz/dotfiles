@@ -1,4 +1,4 @@
-#/bin/sh
+#!/bin/bash
 
 dotfiles=("chunkwmrc"
           "skhdrc"
@@ -7,12 +7,12 @@ dotfiles=("chunkwmrc"
           "hyper.js")
 
 for file in "${dotfiles[@]}"; do
-    source="`pwd`/${file}"
+    source="$(pwd)/${file}"
     dest="${HOME}/.${file}"
 
-    if [ -L $dest ] && [ -e $dest ]; then
-        echo $file "already linked"
+    if [ -L "$dest" ] && [ -e "$dest" ]; then
+        echo "$file already linked"
     else
-        ln -sfv $source $dest
+        ln -sfv "$source" "$dest"
     fi
 done
