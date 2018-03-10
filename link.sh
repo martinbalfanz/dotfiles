@@ -3,7 +3,8 @@
 dotfiles=("chunkwmrc"
           "skhdrc"
           "alacritty.yml"
-          "lein")
+          "lein"
+          "hyper.js")
 
 for file in "${dotfiles[@]}"; do
     ln -sf "`pwd`/${file}" "${HOME}/.${file}"
