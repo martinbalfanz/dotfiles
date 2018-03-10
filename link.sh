@@ -2,7 +2,8 @@
 
 dotfiles=("chunkwmrc"
           "skhdrc"
-          "alacritty.yml")
+          "alacritty.yml"
+          "lein")
 
 for file in "${dotfiles[@]}"; do
     ln -sf "`pwd`/${file}" "${HOME}/.${file}"
