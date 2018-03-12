@@ -153,8 +153,8 @@ rcmd - f : chunkc tiling::window --toggle float
 # shift + alt - t : chunkc set window_float_next 1
 
 # change layout of desktop
-shift - rcmd - y : chunkc tiling::desktop --layout bsp
-shift - rcmd - x : chunkc tiling::desktop --layout monocle
-shift - rcmd - c : chunkc tiling::desktop --layout float
+shift + rcmd - y : chunkc tiling::desktop --layout bsp
+shift + rcmd - x : chunkc tiling::desktop --layout monocle
+shift + rcmd - c : chunkc tiling::desktop --layout float
 
 # ctrl + alt - w : chunkc tiling::desktop --deserialize ~/.chunkwm_layouts/dev_1
