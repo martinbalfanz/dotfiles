@@ -36,7 +36,7 @@
 
 # open emacs,
 rcmd - return : open -a /Applications/Emacs.app
-rcmd - space : open -a /Applications/Alacritty.app
+rcmd - space : open -a /Applications/iTerm.app
 
 # close focused window
 # alt - w : chunkc tiling::window --close
