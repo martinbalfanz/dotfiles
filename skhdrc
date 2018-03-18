@@ -39,7 +39,7 @@ rcmd - return : open -a /Applications/Emacs.app
 rcmd - space : open -a /Applications/iTerm.app
 
 # close focused window
-cmd - w : chunkc tiling::window --close
+# cmd - w : chunkc tiling::window --close
 
 # focus window
 rcmd - left  : chunkc tiling::window --focus west
