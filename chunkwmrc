@@ -111,12 +111,6 @@ chunkc core::load tiling.so
 chunkc tiling::rule --owner \"Finder\" --state float
 chunkc tiling::rule --owner \"Finder\" --name Copy --state float
 chunkc tiling::rule --owner \"App Store\" --state float
-chunkc tiling::rule --owner Fantastical --name General --state float
-chunkc tiling::rule --owner Fantastical --name Appearance --state float
-chunkc tiling::rule --owner Fantastical --name Accounts --state float
-chunkc tiling::rule --owner Fantastical --name Calendars --state float
-chunkc tiling::rule --owner Fantastical --name Alerts --state float
-chunkc tiling::rule --owner Fantastical --name Advanced --state float
-chunkc tiling::rule --owner Fantastical --name Update --state float
+chunkc tiling::rule --owner Fantastical --state float
 chunkc tiling::rule --owner ImageOptim --state float
 chunkc tiling::rule --owner VidyoDesktop --state float
