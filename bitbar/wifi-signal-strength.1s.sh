@@ -5,7 +5,7 @@
 # <bitbar.author.github>martinbalfanz</bitbar.author.github>
 # <bitbar.desc>Displays current wifi signal strength / RSSI</bitbar.desc>
 
-STRENGTH=$(/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I | grep CtlRSSI | sed "s/agrCtlRSSI://")
+STRENGTH=$(/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I | grep CtlRSSI | sed "s/^[ \t]*agrCtlRSSI:[ \t]*//")
 FONT=('font=Menlo' 'size=8')
 
 if [ "$STRENGTH" -gt -60 ]; then
