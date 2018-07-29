@@ -6,6 +6,7 @@
 # <bitbar.desc>Displays current wifi signal strength / RSSI</bitbar.desc>
 
 STRENGTH=$(/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I | grep CtlRSSI | sed "s/^[ \t]*agrCtlRSSI:[ \t]*//")
+CHANNEL=$(/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I | grep channel | sed "s/^[ \t]*channel:[ \t]*//")
 FONT=('font=Menlo' 'size=8')
 
 if [ "$STRENGTH" -gt -60 ]; then
@@ -16,6 +17,11 @@ else
     echo "${STRENGTH}dBm | color=red"
 fi
 
+if [ "$CHANNEL" -gt 40 ]; then
+    echo "5GHz"
+else
+    echo "2.4GHz"
+fi
 
 echo "---"
 /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I | xargs -I % echo % "| $FONT"
