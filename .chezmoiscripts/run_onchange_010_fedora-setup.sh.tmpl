@@ -3,6 +3,8 @@
 # Fedora post-install setup. Runs once per machine.
 # Only executes on the fedora profile
 
+{{ if .isFedora -}}
+
 set -euo pipefail
 
 log()  { echo -e "\n\033[1;34m==>\033[0m $*"; }
@@ -13,9 +15,6 @@ warn_pause() {
     read -rp $'\033[1;33m    Press Enter to continue...\033[0m' _
 }
 die()  { echo -e "\033[1;31m  ✘\033[0m $*" >&2; exit 1; }
-
-
-{{ if .isFedora -}}
 
 set_config_value() {
     # TODO: consider `crudini` for ini files, but this is good enough for now and doesn't require an extra dependency
@@ -196,7 +195,6 @@ echo ""
 
 {{- else }}
 
-log "Not a Fedora machine, skipping Fedora-specific setup"
 exit 0
 
 {{- end }}
