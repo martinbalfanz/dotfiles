@@ -1,0 +1,30 @@
+# .chezmoi.toml.tmpl
+# Generates ~/.config/chezmoi/chezmoi.toml on first `chezmoi init`.
+
+{{- $profile := "" -}}
+{{- if (env "MACHINE_PROFILE") -}}
+{{-   $profile = (env "MACHINE_PROFILE") -}}
+{{- else -}}
+{{-   $profile = promptChoiceOnce . "profile" "Machine profile" (list "personal-mac" "work-mac" "fedora" "arch" "ubuntu") -}}
+{{- end -}}
+
+{{- $name     := promptStringOnce . "name"     "Full name"      -}}
+{{- $email    := promptStringOnce . "email"    "Personal email" -}}
+{{- $workEmail := ""                                            -}}
+{{- if eq $profile "work-mac" -}}
+{{-   $workEmail = promptStringOnce . "workEmail" "Work email" -}}
+{{- end -}}
+
+[data]
+    profile   = {{ $profile   | quote }}
+    name      = {{ $name      | quote }}
+    email     = {{ $email     | quote }}
+    workEmail = {{ $workEmail | quote }}
+
+    # Convenience booleans available in all templates
+    isWork    = {{ eq $profile "work-mac" | toString }}
+    isMac     = {{ or (eq $profile "personal-mac") (eq $profile "work-mac") | toString }}
+    isLinux   = {{ or (eq $profile "fedora") (eq $profile "arch") (eq $profile "ubuntu") | toString }}
+    isFedora  = {{ eq $profile "fedora"  | toString }}
+    isArch    = {{ eq $profile "arch"    | toString }}
+    isUbuntu  = {{ eq $profile "ubuntu"  | toString }}
