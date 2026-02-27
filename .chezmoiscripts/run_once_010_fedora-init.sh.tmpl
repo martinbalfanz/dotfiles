@@ -21,14 +21,14 @@ set_config_value() {
     local file="$1"
     local key="$2"
     local value="$3"
-    local separator="${4:-=}"  # default separator is '=', can override
+    local separator="${4:-=}"
 
     if grep -qE "^\s*${key}\s*${separator}" "$file"; then
-        # Key exists — update it (handles optional whitespace around separator)
+        # Key exists -- update it
         sudo sed -i.bak -E "s|^\s*${key}\s*${separator}.*|${key}${separator}${value}|" "$file"
         echo "Updated: ${key}${separator}${value} in ${file}"
     else
-        # Key missing — append it
+        # Key missing -- append it
         sudo sh -c "echo '${key}${separator}${value}' >> $file"
         echo "Added: ${key}${separator}${value} to ${file}"
     fi
@@ -36,8 +36,6 @@ set_config_value() {
 
 # =============================================================================
 # TUNE DNF
-# Out of the box DNF downloads one package at a time and doesn't pick the
-# fastest mirror. These settings make installs noticeably quicker.
 # =============================================================================
 
 log "Tuning DNF"
@@ -53,7 +51,6 @@ ok "DNF tuned"
 
 # =============================================================================
 # SYSTEM UPDATE
-# Full upgrade before adding third-party repos to avoid conflicts.
 # =============================================================================
 
 log "Updating system"
@@ -62,8 +59,6 @@ ok "System up to date"
 
 # =============================================================================
 # FIRMWARE UPDATES
-# fwupd handles BIOS, SSD, and peripheral firmware. Especially relevant
-# for new hardware like the Ryzen 7800X3D which receives AGESA updates.
 # =============================================================================
 
 log "Checking firmware updates"
@@ -73,7 +68,6 @@ ok "Firmware checked"
 
 # =============================================================================
 # RPM FUSION
-# Required for: multimedia codecs, NVIDIA drivers, etc.
 # =============================================================================
 
 log "Adding RPM Fusion repositories"
@@ -91,7 +85,6 @@ ok "RPM Fusion (free + nonfree) added"
 
 # =============================================================================
 # MULTIMEDIA CODECS
-# RPM Fusion provides the full implementations needed to play H.264, H.265, AAC, MP3, etc.
 # =============================================================================
 
 log "Installing multimedia codecs"
@@ -111,8 +104,6 @@ ok "Codecs installed"
 
 # =============================================================================
 # HARDWARE VIDEO ACCELERATION (VA-API)
-# Offloads video decode/encode to the GPU. Improves browser playback,
-# video calls, and media players. Driver depends on GPU vendor.
 # =============================================================================
 
 log "Installing hardware video acceleration"
@@ -140,8 +131,6 @@ ok "VA-API step complete"
 
 # =============================================================================
 # FULL FLATHUB
-# Fedora enables a filtered Flathub subset by default. This adds the full
-# unfiltered remote so you can install any Flatpak application.
 # =============================================================================
 
 log "Enabling full Flathub"
@@ -170,20 +159,17 @@ ok "GNOME tools installed"
 
 # =============================================================================
 # AUTOMATIC SECURITY UPDATES
-# dnf-automatic downloads and applies updates on a timer. Configured here
-# to apply updates but only take effect on the next reboot.
 # =============================================================================
 
 log "Configuring automatic updates"
 
 sudo dnf install -y dnf-automatic
 
-# Switch apply_updates from no to yes
 set_config_value /etc/dnf/automatic.conf "apply_updates" "True"
 
 sudo systemctl enable --now dnf-automatic.timer
 
-ok "Automatic updates enabled (applies on reboot)"
+ok "Automatic updates enabled"
 
 # =============================================================================
 # DONE
