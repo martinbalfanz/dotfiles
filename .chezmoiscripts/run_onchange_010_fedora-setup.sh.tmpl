@@ -29,7 +29,7 @@ set_config_value() {
         echo "Updated: ${key}${separator}${value} in ${file}"
     else
         # Key missing — append it
-        echo "${key}${separator}${value}" >> "$file"
+        sudo sh -c "echo '${key}${separator}${value}' >> $file"
         echo "Added: ${key}${separator}${value} to ${file}"
     fi
 }
