@@ -24,7 +24,7 @@ set_config_value() {
 
     if grep -qE "^\s*${key}\s*${separator}" "$file"; then
         # Key exists — update it (handles optional whitespace around separator)
-        sed -i.bak -E "s|^\s*${key}\s*${separator}.*|${key}${separator}${value}|" "$file"
+        sudo sed -i.bak -E "s|^\s*${key}\s*${separator}.*|${key}${separator}${value}|" "$file"
         echo "Updated: ${key}${separator}${value} in ${file}"
     else
         # Key missing — append it
@@ -43,10 +43,10 @@ log "Tuning DNF"
 
 DNF_CONF="/etc/dnf/dnf.conf"
 
-sudo set_config_value "$DNF_CONF" "max_parallel_downloads" "10"
-sudo set_config_value "$DNF_CONF" "fastestmirror" "True"s
-sudo set_config_value "$DNF_CONF" "defaultyes" "True"
-sudo set_config_value "$DNF_CONF" "keepcache" "True"
+set_config_value "$DNF_CONF" "max_parallel_downloads" "10"
+set_config_value "$DNF_CONF" "fastestmirror" "True"
+set_config_value "$DNF_CONF" "defaultyes" "True"
+set_config_value "$DNF_CONF" "keepcache" "True"
 
 ok "DNF tuned"
 
