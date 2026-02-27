@@ -85,7 +85,7 @@ RPM_NONFREE="https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-rele
 sudo dnf install -y "$RPM_FREE" "$RPM_NONFREE"
 
 # Pulls AppStream metadata so GNOME Software / KDE Discover can see RPM Fusion apps
-sudo dnf update @core
+sudo dnf group install core
 
 ok "RPM Fusion (free + nonfree) added"
 
@@ -100,12 +100,12 @@ log "Installing multimedia codecs"
 sudo dnf swap -y ffmpeg-free ffmpeg --allowerasing
 
 # Full GStreamer plugin set (--exclude avoids a conflict with PackageKit)
-sudo dnf update @multimedia \
+sudo dnf group install multimedia \
     --setopt="install_weak_deps=False" \
     --exclude=PackageKit-gstreamer-plugin
 
 # Additional sound and video support
-sudo dnf update @sound-and-video
+sudo dnf group install sound-and-video
 
 ok "Codecs installed"
 
@@ -178,9 +178,9 @@ log "Configuring automatic updates"
 sudo dnf install -y dnf-automatic
 
 # Switch apply_updates from no to yes
-sudo set_config_value /etc/dnf/automatic.conf "apply_updates" "yes"
+set_config_value /etc/dnf/automatic.conf "apply_updates" "True"
 
-sudo systemctl enable --now dnf-automatic-install.timer
+sudo systemctl enable --now dnf-automatic.timer
 
 ok "Automatic updates enabled (applies on reboot)"
 
