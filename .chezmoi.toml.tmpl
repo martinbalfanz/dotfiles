@@ -22,9 +22,9 @@
     workEmail = {{ $workEmail | quote }}
 
     # Convenience booleans available in all templates
-    isWork    = {{ eq $profile "work-mac" | toString }}
-    isMac     = {{ or (eq $profile "personal-mac") (eq $profile "work-mac") | toString }}
-    isLinux   = {{ or (eq $profile "fedora") (eq $profile "arch") (eq $profile "ubuntu") | toString }}
-    isFedora  = {{ eq $profile "fedora"  | toString }}
-    isArch    = {{ eq $profile "arch"    | toString }}
-    isUbuntu  = {{ eq $profile "ubuntu"  | toString }}
+    isWork    = {{ eq $profile "work-mac" | quote }}
+    isMac     = {{ or (eq $profile "personal-mac") (eq $profile "work-mac") | quote }}
+    isLinux   = {{ or (eq $profile "fedora") (eq $profile "arch") (eq $profile "ubuntu") | quote }}
+    isFedora  = {{ eq $profile "fedora" | quote }}
+    isArch    = {{ eq $profile "arch" | quote }}
+    isUbuntu  = {{ eq $profile "ubuntu" | quote }}
