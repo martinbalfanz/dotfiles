@@ -15,7 +15,7 @@ warn_pause() {
 die()  { echo -e "\033[1;31m  ✘\033[0m $*" >&2; exit 1; }
 
 
-{{ if eq .isFedora "true" -}}
+{{ if .isFedora -}}
 
 set_config_value() {
     # TODO: consider `crudini` for ini files, but this is good enough for now and doesn't require an extra dependency
