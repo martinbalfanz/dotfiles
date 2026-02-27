@@ -162,8 +162,9 @@ log "Installing GNOME tools"
 
 sudo dnf install -y \
     gnome-tweaks \
-    gnome-extensions-app \
     dconf-editor
+
+flatpak install -y -u flathub com.mattjakeman.ExtensionManager
 
 ok "GNOME tools installed"
 
