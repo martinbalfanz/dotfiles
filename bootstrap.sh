@@ -66,6 +66,7 @@ install_prerequisites() {
 init_chezmoi() {
     log "Initialising chezmoi"
 
+    export PATH="$HOME/bin:$PATH"
     sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply "$GH_USER"
 
     command -v chezmoi &>/dev/null || die "chezmoi not found after install. Please install it manually: https://chezmoi.io/install"
