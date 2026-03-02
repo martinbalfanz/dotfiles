@@ -69,6 +69,21 @@ init_chezmoi() {
     export PATH="$HOME/bin:$PATH"
     sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply "$GH_USER"
 
+    PROFILE="$HOME/.profile"
+    touch "$PROFILE"
+
+    DIR='$HOME/.local/bin'
+    # shellcheck disable=SC2016
+    if ! grep -Fq "$DIR" "$PROFILE"; then
+        printf 'export PATH="%s:$PATH"\n' "$DIR" >> "$PROFILE"
+    fi
+
+    DIR='$HOME/bin'
+    # shellcheck disable=SC2016
+    if ! grep -Fq "$DIR" "$PROFILE"; then
+        printf 'export PATH="%s:$PATH"\n' "$DIR" >> "$PROFILE"
+    fi
+
     command -v chezmoi &>/dev/null || die "chezmoi not found after install. Please install it manually: https://chezmoi.io/install"
     ok "Chezmoi ready ($(chezmoi --version | head -1))"
 }
