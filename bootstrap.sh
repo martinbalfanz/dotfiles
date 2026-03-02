@@ -91,7 +91,6 @@ main() {
 
     echo ""
     ok "Bootstrap complete! Restart your shell (or reboot on Linux) to apply all changes."
-    echo "You can now delete the bootstrap.sh"
     echo ""
     echo "  Useful commands going forward:"
     echo "    chezmoi edit ~/.zshrc      # edit a dotfile"
