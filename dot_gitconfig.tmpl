@@ -1,0 +1,7 @@
+[user]
+	name = {{ .name }}
+{{- if .isWork}}
+	email = {{ .workEmail }}
+{{- else }}
+	email = {{ .email }}
+{{- end }}
