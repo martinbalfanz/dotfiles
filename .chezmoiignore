@@ -2,3 +2,7 @@ README.md
 bootstrap.sh
 system/
 .projectile
+
+{{ if not .isMac -}}
+dot_config/doom
+{{ end -}}

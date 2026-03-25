@@ -10,16 +10,21 @@
 
 {{- $name     := promptStringOnce . "name"     "Full name"      -}}
 {{- $email    := promptStringOnce . "email"    "Personal email" -}}
-{{- $workEmail := ""                                            -}}
-{{- if eq $profile "work-mac" -}}
-{{-   $workEmail = promptStringOnce . "workEmail" "Work email" -}}
+{{- $orgDirectory := ""                                                     -}}
+{{- if ne $profile "work-mac" -}}
+{{-   $orgDirectory = promptStringOnce . "orgDirectory" "Org directory" -}}
 {{- end }}
+
+encryption = "age"
+[age]
+    identity  = "~/.config/chezmoi/key.txt"
+    recipient = "age1zldtzk8pugjzsx5jv50zusgk9q6lgwrx6ct26pg3e7ragdugcgwqfrvdrf"
 
 [data]
     profile   = {{ $profile   | quote }}
     name      = {{ $name      | quote }}
     email     = {{ $email     | quote }}
-    workEmail = {{ $workEmail | quote }}
+    orgDirectory = {{ $orgDirectory | quote }}
 
     # Convenience booleans available in all templates
     isWork    = {{ eq $profile "work-mac" }}
